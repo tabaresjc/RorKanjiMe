@@ -21,5 +21,7 @@ module Kanjime
     
     # Heroku REQUIRES this to be false
     config.assets.initialize_on_precompile = false
+    
+    config.assets.compile = true
   end
 end
