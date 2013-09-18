@@ -9,16 +9,17 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
+ 
+ *= require css/bootstrap/bootstrap.css
+ *= require css/bootstrap/bootstrap-overrides.css
+ 
+ *= require css/lib/jquery-ui-1.10.2.custom.css
+ *= require css/lib/font-awesome.css
+ 
+ *= require css/compiled/layout.css
+ *= require css/compiled/elements.css
+ *= require css/compiled/icons.css 
+ 
  *= require_tree .
  */
-.content {
- background-color: #eee;
- padding: 20px;
- margin: 0 -20px;
- -webkit-border-radius: 0 0 6px 6px;
- -moz-border-radius: 0 0 6px 6px;
- border-radius: 0 0 6px 6px;
- -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
- -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
- box-shadow: 0 1px 2px rgba(0,0,0,.15);
-}
+
