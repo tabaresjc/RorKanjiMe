@@ -5,15 +5,7 @@
     %title= content_for?(:title) ? yield(:title) : "Rails Bootstrap"
     %meta{:content => content_for?(:description) ? yield(:description) : "Rails Bootstrap", :name => "description"}
    
-    = stylesheet_link_tag "application"
-    %link(rel="stylesheet" href="assets/css/bootstrap/bootstrap.css")
-    %link(rel="stylesheet" href="assets/css/bootstrap/bootstrap-overrides.css")
-    %link(rel="stylesheet" href="assets/css/lib/jquery-ui-1.10.2.custom.css")
-    %link(rel="stylesheet" href="assets/css/lib/font-awesome.css")
-    %link(rel="stylesheet" href="assets/css/compiled/layout.css")
-    %link(rel="stylesheet" href="assets/css/compiled/elements.css")
-    %link(rel="stylesheet" href="assets/css/compiled/icons.css")
-    
+    = stylesheet_link_tag "application"  
     <!-- this page specific styles -->
     = yield(:custom_css)
     
