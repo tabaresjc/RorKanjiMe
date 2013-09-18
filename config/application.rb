@@ -14,13 +14,8 @@ module Kanjime
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
     
-    # Heroku REQUIRES this to be false
-    config.assets.initialize_on_precompile = false
-    
     # Enable the asset pipeline
     config.assets.enabled = true
-    
-    config.assets.compile = false
     
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
