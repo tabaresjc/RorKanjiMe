@@ -18,5 +18,15 @@ module Kanjime
     
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
+    
+    # Heroku REQUIRES this to be false
+    config.assets.initialize_on_precompile = false
+    
+    # Not required, but a good best-practice for performance.
+    # This setting will compress your assets as much as possible using YUI and Uglifier by default
+    config.assets.compress = false
+        
+    # Allow fingerprinting of asset filenames - good for caching.
+    config.assets.digest = false 
   end
 end
