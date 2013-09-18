@@ -8,13 +8,8 @@ Bundler.require(:default, Rails.env)
 
 module Kanjime
   class Application < Rails::Application
+    # Add Theme
   	config.assets.paths += Dir["#{Rails.root}/vendor/details-wrap/*"]
-  	
-     # Enable the asset pipeline
-    config.assets.enabled = true
-
-    # Version of your assets, change this if you want to expire all your assets
-    config.assets.version = '1.0'
     
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
@@ -22,6 +17,10 @@ module Kanjime
     # Heroku REQUIRES this to be false
     config.assets.initialize_on_precompile = false
     
-    config.assets.compile = true
+    # Enable the asset pipeline
+    config.assets.enabled = true
+
+    # Version of your assets, change this if you want to expire all your assets
+    config.assets.version = '1.0'
   end
 end
