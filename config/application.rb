@@ -24,7 +24,8 @@ module Kanjime
     
     # Not required, but a good best-practice for performance.
     # This setting will compress your assets as much as possible using YUI and Uglifier by default
-    config.assets.compress = false
+    config.assets.compile = false
+    config.serve_static_assets = true
         
     # Allow fingerprinting of asset filenames - good for caching.
     config.assets.digest = false 
