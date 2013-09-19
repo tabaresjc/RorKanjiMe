@@ -1,5 +1,8 @@
 Kanjime::Application.routes.draw do
+  get 'pages/about'
+  get 'pages/help'
+  get 'pages/home'
+  
   resources :users
-
-  root :to => 'visitors#new'
+  root :to => 'pages#home'
 end

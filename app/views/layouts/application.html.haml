@@ -14,10 +14,9 @@
   %body
     = render 'layouts/banner'
     = render 'layouts/sidebar'           
-    %div{:class => "content"}
-      %div#pad-wrapper
-        = render 'layouts/messages'
-        = yield
+    %div{:class => "content"}      
+      = render 'layouts/messages'
+      = yield
           
     %script(src="http://code.jquery.com/jquery-latest.js")    
     = javascript_include_tag "application"    
