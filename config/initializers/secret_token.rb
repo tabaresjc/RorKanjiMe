@@ -9,4 +9,20 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Kanjime::Application.config.secret_key_base = '8b27cc8e1376911cef4711375e91c9ea4d2a8afb27efdda3dc6707fe4f0e0c9c6d61eb0f13fdacfad26c2cbd39834d08cf22bab29e4f64e2bbb7fe5812beadf1'
+require 'securerandom'
+
+def secure_token
+  token_file = Rails.root.join('.secret')
+  if File.exist?(token_file)
+    # Use the existing token.
+    File.read(token_file).chomp
+  else
+    # Generate a new token and store it in token_file.
+    token = SecureRandom.hex(64)
+    File.write(token_file, token)
+    token
+  end
+end
+
+Kanjime::Application.config.secret_key_base = secure_token
+
