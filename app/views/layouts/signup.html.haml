@@ -10,9 +10,11 @@
     = render 'layouts/fonts'
     = csrf_meta_tags       
   %body
-    = render 'layouts/banner'
-    = render 'layouts/sidebar'           
-    %div{:class => "content"}      
+    %div.header
+      %a{:href => root_path }
+        %img{:src => "/assets/img/logo.png"}
+
+    %div{:class => "login-wrapper"}      
       = render 'layouts/messages'
       = yield
           

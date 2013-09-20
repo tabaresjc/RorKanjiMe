@@ -1,5 +1,26 @@
-%h1 New user
+- content_for :title do
+  Signup
+- content_for(:custom_css) do
+  / this page specific styles
+  %link(rel="stylesheet" href="/assets/css/compiled/signup.css")
 
-= render 'form'
+    
+%div.box
+  %div{:class=>"row"}
+    %div.col-md-12
+      = render 'layouts/users_messages'
+  %div.content-wrap
+    %h6 Sign Up
+    = form_tag users_path, :id => "new_user" do      
+      = text_field :user, 'name', :placeholder => "Name & Lastname", :class => "form-control"
+      = text_field :user, 'email', :placeholder => "Email", :class => "form-control"
+      = password_field_tag 'user[password]', nil, :placeholder => "Password", :class => "form-control"
+      = password_field_tag 'user[password_confirmation]', nil, :placeholder => "Confirm Password", :class => "form-control"
+      %div.action
+        = submit_tag 'Signup', :class => 'btn-glow primary signup'
+%div.already
+  %p Already have an account?
+  %a{:href => root_path } Sign in
 
-= link_to 'Back', users_path
+
+
