@@ -1,21 +1,40 @@
-%h1 Listing users
+- content_for :title do
+  User List
+- content_for(:custom_css) do
+  / this page specific styles
+  %link(rel="stylesheet" href="/assets/css/compiled/user-list.css")
 
-%table
-  %tr
-    %th Name
-    %th Email
-    %th
-    %th
-    %th
-
-  - @users.each do |user|
-    %tr
-      %td= user.name
-      %td= user.email
-      %td= link_to 'Show', user
-      %td= link_to 'Edit', edit_user_path(user)
-      %td= link_to 'Destroy', user, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
-
-= link_to 'New User', new_user_path
+%div{:id=>"pad-wrapper", :class=>"user-list"}
+  %div{:class=>"row header"}
+    %h3 Users
+    %div{:class=>"col-md-10 col-sm-12 col-xs-12 pull-right"}
+      %input{:type=>"text", :class=>"col-md-5 search", "placeholder"=>"Type a user's name..."}
+      %a{:href=> new_user_path, :class=> "btn-flat success pull-right"}
+        %span &#43;
+        NEW USER
+  %div.row
+    %div.col-md-12
+      %table.table.table-hover
+        %thead
+          %tr
+            %th.col-md-4.sortable Name
+            %th.col-md-2.sortable
+              %span.line
+              Created
+            %th.col-md-2.sortable
+              %span.line
+              Updated
+            %th
+              %span.line
+        %tbody
+          - @users.each do |user|
+            %tr
+              %td
+                = gravatar_for user
+                = link_to user.name, user, :class=>"name"
+                %span.subtext= user.email
+              %td= user.created_at
+              %td= user.updated_at
+              %td= link_to 'Show', user
+              %td= link_to 'Edit', edit_user_path(user)
+              %td= link_to 'Destroy', user, :method => :delete, :data => { :confirm => 'Are you sure?' }
