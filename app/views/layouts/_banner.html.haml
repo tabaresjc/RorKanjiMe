@@ -10,16 +10,21 @@
   %ul{:class=>"nav navbar-nav pull-right hidden-xs"}
     %li{:class=>"hidden-xs hidden-sm"}
       %input.search{:type=>"text"}
-    %li.dropdown
-      %a{:href => "javascript:void(0)", :class=>"dropdown-toggle hidden-xs hidden-sm", "data-toggle"=>"dropdown"}
-        Your account
-        %b.caret
-      %ul.dropdown-menu
-        %li
-          %a{:href => "javascript:void(0)"} Profile
-        %li.divider
-        %li
-          %a{:href => "javascript:void(0)"} Logout
+    - if signed_in?
+      %li.dropdown
+        %a{:href => "javascript:void(0)", :class=>"dropdown-toggle hidden-xs hidden-sm", "data-toggle"=>"dropdown"}
+          Your account
+          %b.caret
+        %ul.dropdown-menu
+          %li
+            = link_to "Profile", user_path(current_user)
+          %li
+            %a{:href => "#"} Settings
+          %li.divider
+          %li
+            = link_to "Sign out", signout_path, method: "delete"
+
+
     %li{:class=>"settings hidden-xs hidden-sm"}
       %a{:href=>"", :role=>"button"}
         %i{:class=>"icon-cog"}

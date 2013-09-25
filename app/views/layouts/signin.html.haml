@@ -1,5 +1,5 @@
 !!!
-%html
+%html.login-bg
   %head
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
     %title= content_for?(:title) ? yield(:title) : "Rails Bootstrap"
@@ -7,18 +7,14 @@
    
     = stylesheet_link_tag "application"  
     = yield(:custom_css)
-    = render 'layouts/fonts'  
+    = render 'layouts/fonts' 
   %body
-    %div.header
-      %a{:href => root_path }
-        %img{:src => "/assets/img/logo.png"}
-    
-    = render 'layouts/messages'
-    %div.login-wrapper
+    = render 'layouts/messages' unless flash.empty?
+    %div.login-wrapper      
       = yield
       = render 'layouts/debug' if Rails.env.development?
-      
+
     %script(src="http://code.jquery.com/jquery-latest.js")    
     = javascript_include_tag "application"
-    = csrf_meta_tags  
+    = csrf_meta_tags   
     = yield(:custom_js)

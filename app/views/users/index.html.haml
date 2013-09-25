@@ -35,12 +35,7 @@
               %td= user.created_at
               %td= user.updated_at
               %td
-                
-                
-                
-
                 %a{:href=> edit_user_path(user), :class=> "btn btn-primary" }
                   %i.icon-edit
-                %a{:href=> url_for(:controller => 'users', :action => 'destroy', :id => user), :class=> "btn btn-primary", "data-confirm"=>"Are you sure?", "data-method"=>"delete" }
+                %a{:href=> url_for(:controller => 'users', :action => 'destroy', :id => user), :class=> "btn btn-primary", "data-confirm"=>"This will delete #{user.name}, Are you sure?", "data-method"=>"delete" }
                   %i.icon-trash
-                

@@ -5,14 +5,14 @@ describe User do
 		@user = User.new(name: "First User", email: "user@example.com", password: "foobar", password_confirmation: "foobar")
 	end
 
-	it 'should respont to fields' do
-		@user.should respond_to(:name)
-		@user.should respond_to(:email)
-		@user.should respond_to(:password_digest)
-		@user.should respond_to(:password)
-		@user.should respond_to(:password_confirmation)
-		@user.should respond_to(:authenticate)
-	end
+	it { should respond_to(:name) }
+	it { should respond_to(:email) }
+	it { should respond_to(:authenticate) }	
+	it { should respond_to(:password_digest) }
+	it { should respond_to(:password) }
+	it { should respond_to(:password_confirmation) }
+	it { should respond_to(:authenticate) }
+	it { should respond_to(:remember_token) }
 
 	it 'should be valid when all fields are present' do
 		@user.should be_valid
@@ -105,4 +105,10 @@ describe User do
     		expect(user_for_invalid_password).to be_false
 		end
 	end
+
+	describe "remember token" do
+		before { @user.save }
+		subject { @user }
+		it (:remember_token) { should_not be_blank }
+	end	
 end

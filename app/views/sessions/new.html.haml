@@ -1,0 +1,21 @@
+- content_for :title do
+  Sign in
+- content_for(:custom_css) do
+  / this page specific styles
+  %link(rel="stylesheet" href="/assets/css/compiled/signin.css")
+
+%a{ :href => root_path }
+  %img.logo{ :src => "/assets/img/logo-white.png" }
+%div.box
+  %div.content-wrap
+    %h6 Sign in
+    = form_for(:session, url: sessions_path) do |f|
+      = f.text_field :email, :class => "form-control", :placeholder => "Email address"
+      = f.password_field :password, :class => "form-control", :placeholder => "Your password"
+      %div.remember
+        <input id="remember-me" type="checkbox">
+        <label for="remember-me">Remember me</label>
+      = f.submit "Sign in", class: "btn-glow primary login"
+%div.no-account
+  %p Don't have an account?
+  %a{:href=> signup_path} Sign up

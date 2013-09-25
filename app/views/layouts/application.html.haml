@@ -1,7 +1,7 @@
 !!!
 %html
   %head
-    %title= content_for?(:title) ? yield(:title) : "Rails Bootstrap"
+    %title= content_for?(:title) ? app_name + " | " + yield(:title) : app_name
     
     %meta{"http-equiv"=>"Content-Type", :content => "text/html; charset=utf-8"}
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
@@ -12,19 +12,16 @@
     = stylesheet_link_tag "/assets/css/compiled/skins/dark.css"
     = yield(:custom_css)
     = render 'layouts/fonts'
-    = csrf_meta_tags       
+           
   %body
     = render 'layouts/banner'
     = render 'layouts/sidebar'           
     %div{:class => "content"}
       = render 'layouts/messages'
       = yield
-    = if Rails.env.development?
-      %div.row-fluid
-        %div.col-md-12
-          %div.well
-            = debug(params)
+    = render 'layouts/debug' if Rails.env.development?
           
     %script(src="http://code.jquery.com/jquery-latest.js")    
-    = javascript_include_tag "application"    
+    = javascript_include_tag "application"
+    = csrf_meta_tags
     = yield(:custom_js)

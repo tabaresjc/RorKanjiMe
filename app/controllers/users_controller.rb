@@ -29,7 +29,8 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        sign_in @user
+        format.html { redirect_to @user, notice: "Welcome to #{app_name}"  }
         format.json { render action: 'show', status: :created, location: @user }
       else
         format.html { render action: 'new', :layout => "signup" }
@@ -60,11 +61,6 @@ class UsersController < ApplicationController
       format.html { redirect_to users_url }
       format.json { head :no_content }
     end
-  end
-
-  # GET /signin
-  def signin
-
   end
 
   private
