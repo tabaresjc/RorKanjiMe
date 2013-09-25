@@ -9,7 +9,7 @@ gem 'jquery-rails'
 #gem "bootstrap-sass", "~> 2.3.2.2"
 gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
-gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails', :github => 'anjlab/bootstrap-rails'
+#gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails', :github => 'anjlab/bootstrap-rails'
 gem 'figaro'
 gem 'haml-rails'
 gem 'high_voltage'

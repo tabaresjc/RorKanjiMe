@@ -1,12 +1,4 @@
 GIT
-  remote: git://github.com/anjlab/bootstrap-rails.git
-  revision: 583659441aa843e47f8002c562c2911500b2fd3e
-  specs:
-    anjlab-bootstrap-rails (3.0.0.3)
-      railties (>= 3.0)
-      sass (>= 3.2)
-
-GIT
   remote: git://github.com/bmabey/database_cleaner.git
   revision: df55cf7b746e792dba1d11eea0d6e31e3abc7e8c
   specs:
@@ -215,7 +207,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  anjlab-bootstrap-rails!
   bcrypt-ruby (= 3.0.1)
   better_errors
   binding_of_caller

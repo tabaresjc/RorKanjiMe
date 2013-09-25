@@ -11,7 +11,7 @@
 // about supported directives.
 //
 //= require jquery_ujs
-//= require js/bootstrap.js
 //= require js/jquery-ui-1.10.2.custom.min.js
+//= require js/bootstrap.js
 //= require_tree .
 
