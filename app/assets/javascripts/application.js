@@ -10,8 +10,9 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery_ujs
-//= require js/jquery-ui-1.10.2.custom.min.js
+//= require js/jquery-1.10.2.js
 //= require js/bootstrap.js
+//= require js/jquery-ui-1.10.2.custom.min.js
+//= require jquery_ujs
 //= require_tree .
 

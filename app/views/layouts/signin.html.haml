@@ -14,7 +14,6 @@
       = yield
       = render 'layouts/debug' if Rails.env.development?
 
-    %script(src="http://code.jquery.com/jquery-latest.js")    
     = javascript_include_tag "application"
     = csrf_meta_tags   
     = yield(:custom_js)
