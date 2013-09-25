@@ -3,7 +3,6 @@
 - content_for(:custom_css) do
   / this page specific styles
   %link(rel="stylesheet" href="/assets/css/compiled/user-list.css")
-
 %div{:id=>"pad-wrapper", :class=>"users-list"}
   %div{:class=>"row header"}
     %h3 Users
@@ -42,6 +41,6 @@
 
                 %a{:href=> edit_user_path(user), :class=> "btn btn-primary" }
                   %i.icon-edit
-                %a{:href=> user_path(user), :class=> "btn btn-primary", "data-confirm"=>"Are you sure?", "data-method"=>"delete" }
+                %a{:href=> url_for(:controller => 'users', :action => 'destroy', :id => user), :class=> "btn btn-primary", "data-confirm"=>"Are you sure?", "data-method"=>"delete" }
                   %i.icon-trash
-                = link_to 'Destroy', user, :method => :delete, :data => { :confirm => 'Are you sure?' }                      
+                
