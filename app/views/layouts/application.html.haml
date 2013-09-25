@@ -1,11 +1,15 @@
 !!!
 %html
   %head
-    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
     %title= content_for?(:title) ? yield(:title) : "Rails Bootstrap"
+    
+    %meta{"http-equiv"=>"Content-Type", :content => "text/html; charset=utf-8"}
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
     %meta{:content => content_for?(:description) ? yield(:description) : "Rails Bootstrap", :name => "description"}
-   
-    = stylesheet_link_tag "application"  
+
+    / StyleSheets   
+    = stylesheet_link_tag "application"
+    = stylesheet_link_tag "/assets/css/compiled/skins/dark.css"
     = yield(:custom_css)
     = render 'layouts/fonts'
     = csrf_meta_tags       
