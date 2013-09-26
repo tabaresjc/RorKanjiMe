@@ -11,7 +11,8 @@
       = gravatar_for @user, :size => 96
       %h3.name= @user.name
       %span.area= @user.email
-    = link_to (content_tag(:i, "", :class => "icon-trash")).html_safe, user_path(@user), :method => :delete, :class => 'btn-flat icon pull-right delete-user', "title"=>"Delete user",  "data-toggle"=>"tooltip", "data-placement"=>"top"
-    = link_to 'Edit this person', edit_user_path(@user), :class => "btn-flat icon large pull-right edit"
+    - if current_user.admin? && !current_user?(@user)
+      = link_to (content_tag(:i, "", :class => "icon-trash") + " Delete").html_safe, user_path(@user), :method => :delete, :class => 'btn-flat icon pull-right delete-user', "title"=>"Delete user",  "data-toggle"=>"tooltip", "data-placement"=>"top"
+    = link_to (content_tag(:i, "", :class => "icon-edit") + " Edit").html_safe, edit_user_path(@user), :class => "btn-flat icon large pull-right edit"
 
 

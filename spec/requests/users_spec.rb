@@ -4,22 +4,53 @@ require 'spec_helper'
 describe "Users" do
 
   describe "index" do
-    before do
-      sign_in FactoryGirl.create(:user)
-      FactoryGirl.create(:user, name: "Bob", email: "bob@example.com")
-      FactoryGirl.create(:user, name: "Ben", email: "ben@example.com")
+    let(:user) { FactoryGirl.create(:user) }
+    before(:each) do
+      sign_in user
       visit users_path
     end
+
     subject { page }
+
     it { should have_title('User List') }
     it { should have_content('Users') }
 
-    it "should list each user" do
-      User.all.each do |user|
-        expect(page).to have_selector('tr > td', text: user.name)
+    describe "pagination" do
+
+      before do
+        30.times { FactoryGirl.create(:user) }
+      end
+
+      it { should have_selector('ul.pagination') }
+
+      it "should list each user" do
+        User.paginate(page: 1, :per_page => 10).each do |user|
+          expect(page).to have_selector('tr > td', text: user.name)
+        end
       end
     end
-  end  
+
+    describe "delete links" do
+      it { should_not have_link('delete') }
+      describe "as an admin user" do
+        let(:admin) { FactoryGirl.create(:admin) }
+        
+        before do
+          sign_in admin
+          visit users_path
+        end
+
+        it { should have_link('delete') }
+
+        it "should be able to delete another user" do
+          expect do
+            click_link('delete', match: :first)
+          end.to change(User, :count).by(-1)
+        end
+        
+      end
+    end
+  end   
 
   describe "profile page" do
     let(:user) { FactoryGirl.create(:user) }
