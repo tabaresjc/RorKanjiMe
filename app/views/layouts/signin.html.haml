@@ -9,13 +9,13 @@
     = yield(:custom_css)
     = render 'layouts/fonts' 
   %body.login-bg
-    .row
+    .row-fluid
       .col-md-12
         .logo
           %a{ :href => root_path }
             %img.logo{ :src => "/assets/img/logo-white.png" }
     - if !flash.empty?
-      .row
+      .row-fluid
         .col-md-12
           .message-container
             = render 'layouts/messages'

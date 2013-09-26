@@ -36,6 +36,7 @@ describe "Authentication" do
       end
 
       it { should have_content(user.name) }
+      it { should have_link('User List',   href: users_path) }
       it { should have_link('Profile',     href: user_path(user)) }
       it { should have_link('Settings',    href: edit_user_path(user)) }
       it { should have_link('Sign out',    href: signout_path) }
@@ -63,7 +64,7 @@ describe "Authentication" do
 
         describe "after signing in" do
           it "should render the desired protected page" do
-            expect(page).to have_title('Edit user')
+            expect(page).to have_title('Edit profile')
           end
         end
       end
@@ -78,6 +79,11 @@ describe "Authentication" do
         describe "submitting to the update action" do
           before { patch user_path(user) }
           specify { expect(response).to redirect_to(signin_path) }
+        end
+
+        describe "visiting the user index" do
+          before { visit users_path }
+          it { should have_title('Sign in') }
         end
       end
     end

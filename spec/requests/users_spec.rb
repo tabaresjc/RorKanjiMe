@@ -3,11 +3,21 @@ require 'spec_helper'
 
 describe "Users" do
 
-  describe "index page" do
-    it "should successfully load" do
-      # Run the generator again with the --webrat flag if you want to use webrat methods/matchers
-      get users_path
-      response.status.should be(200)
+  describe "index" do
+    before do
+      sign_in FactoryGirl.create(:user)
+      FactoryGirl.create(:user, name: "Bob", email: "bob@example.com")
+      FactoryGirl.create(:user, name: "Ben", email: "ben@example.com")
+      visit users_path
+    end
+    subject { page }
+    it { should have_title('User List') }
+    it { should have_content('Users') }
+
+    it "should list each user" do
+      User.all.each do |user|
+        expect(page).to have_selector('tr > td', text: user.name)
+      end
     end
   end  
 
