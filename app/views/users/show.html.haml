@@ -5,7 +5,7 @@
   %link(rel="stylesheet" href="/assets/css/compiled/user-profile.css")
 
 
-%div{:id=>"pad-wrapper", :class=>"user-profile"}
+%div.user-profile
   %div{:class=>"row header"}
     %div.col-md-12
       = gravatar_for @user, :size => 96

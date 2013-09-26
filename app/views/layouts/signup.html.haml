@@ -2,7 +2,7 @@
 %html
   %head
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
-    %title= content_for?(:title) ? yield(:title) : "Rails Bootstrap"
+    %title= full_title(yield(:title))
     %meta{:content => content_for?(:description) ? yield(:description) : "Rails Bootstrap", :name => "description"}
    
     = stylesheet_link_tag "application"  
@@ -12,11 +12,14 @@
     %div.header
       %a{:href => root_path }
         %img{:src => "/assets/img/logo.png"}
-    
-    = render 'layouts/messages'
-    %div.login-wrapper
-      = yield
-      = render 'layouts/debug' if Rails.env.development?
+
+    - if !flash.empty?
+      %div.row-fluid
+        %div.col-md-12
+          = render 'layouts/messages'
+
+    = yield
+    = render 'layouts/debug' if Rails.env.development?
       
     = javascript_include_tag "application"
     = csrf_meta_tags  

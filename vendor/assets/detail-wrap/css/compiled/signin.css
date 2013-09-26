@@ -8,18 +8,20 @@
   background-size: cover;
 }
 
-.message-container{
-  position: absolute;
-  top: 0px;
-  left: 0;
-  right: 0;  
+.login-bg .logo {
+  text-align: center;
+  margin: 10px 20px;
+}
+
+.login-bg .message-container{
+  margin: 0px 20px 10px 20px;
 }
 
 .login-wrapper {
-  position: absolute;
+  /*position: absolute;
   top: 90px;
   left: 0;
-  right: 0;
+  right: 0;*/
   text-align: center;
 }
 .login-wrapper .logo {

@@ -1,8 +1,7 @@
 !!!
 %html
   %head
-    %title= content_for?(:title) ? app_name + " | " + yield(:title) : app_name
-    
+    %title= full_title(yield(:title))
     %meta{"http-equiv"=>"Content-Type", :content => "text/html; charset=utf-8"}
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
     %meta{:content => content_for?(:description) ? yield(:description) : "Rails Bootstrap", :name => "description"}
@@ -16,11 +15,11 @@
   %body
     = render 'layouts/banner'
     = render 'layouts/sidebar'           
-    %div{:class => "content"}
-      = render 'layouts/messages'
-      = yield
+    .content
+      #pad-wrapper
+        = render 'layouts/messages' unless flash.empty?
+        = yield
     = render 'layouts/debug' if Rails.env.development?
-          
     = javascript_include_tag "application"
     = csrf_meta_tags
     = yield(:custom_js)

@@ -1,8 +1,7 @@
 - flash.each do |name, msg|
   - if msg.is_a?(String)
-    %div.row-fluid.message-container
-      %div.col-md-12
-        %div{:class => "alert alert-#{name == :notice ? "success" : "danger"}", :style=>"margin-top:20px;"}
-          %a.close{"data-dismiss" => "alert"} ×
-          = content_tag :div, msg, :id => "flash_#{name}"
+    %div{:class => "alert alert-#{name == :notice ? "success" : "danger"}"}
+      %a.close{"data-dismiss" => "alert"} ×
+      %i{:class => "#{name == :notice ? "icon-info-sign" : "icon-exclamation-sign"}"}
+      = msg
 - flash.clear

@@ -21,10 +21,11 @@ body {
   height: 75px;
   text-align: center;
   padding-top: 28px;
+  margin-bottom: 20px;
 }
 
 .login-wrapper {
-  position: absolute;
+  /*position: absolute;*/
   left: 0;
   right: 0;
   text-align: center;

@@ -19,7 +19,7 @@
           %li
             = link_to "Profile", user_path(current_user)
           %li
-            %a{:href => "#"} Settings
+            %a{:href => edit_user_path(current_user) } Settings
           %li.divider
           %li
             = link_to "Sign out", signout_path, method: "delete"

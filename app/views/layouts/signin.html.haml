@@ -1,15 +1,25 @@
 !!!
-%html.login-bg
+%html
   %head
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
-    %title= content_for?(:title) ? yield(:title) : "Rails Bootstrap"
+    %title= full_title(yield(:title))
     %meta{:content => content_for?(:description) ? yield(:description) : "Rails Bootstrap", :name => "description"}
    
     = stylesheet_link_tag "application"  
     = yield(:custom_css)
     = render 'layouts/fonts' 
-  %body
-    = render 'layouts/messages' unless flash.empty?
+  %body.login-bg
+    .row
+      .col-md-12
+        .logo
+          %a{ :href => root_path }
+            %img.logo{ :src => "/assets/img/logo-white.png" }
+    - if !flash.empty?
+      .row
+        .col-md-12
+          .message-container
+            = render 'layouts/messages'
+    
     %div.login-wrapper      
       = yield
       = render 'layouts/debug' if Rails.env.development?

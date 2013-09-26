@@ -1,7 +1,22 @@
-%h1 Editing user
+- content_for :title do
+  = "Edit profile"
+- content_for(:custom_css) do
+  / this page specific styles
+  %link(rel="stylesheet" href="/assets/css/compiled/personal-info.css")
 
-= render 'form'
+.settings-wrapper
+  - if @user.errors.any?
+    = render 'layouts/users_messages'
+  %div.row
+    %div.col-md-3.col-md-offset-1.avatar-box
+      %div.personal-image
+        = gravatar_for @user, :size => 128
+        %p
+        %a{:href => "http://gravatar.com/emails" , :class => "btn btn-large btn-info"} Change
+    %div.col-md-7.personal-info
+      %h5.personal-title
+        %i.icon-user
+        = "Profile: #{@user.name}"
 
-= link_to 'Show', @user
-\|
-= link_to 'Back', users_path
+      = render 'form'
+

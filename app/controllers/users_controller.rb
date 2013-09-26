@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
+  before_action :signed_in_user, only: [:edit, :update]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :correct_user,   only: [:edit, :update]
 
   # GET /users
   # GET /users.json
@@ -14,7 +16,7 @@ class UsersController < ApplicationController
 
   # GET /users/new
   def new
-    @user = User.new
+    @user = User.new    
     render :layout => "signup"
   end
 
@@ -44,7 +46,7 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.html { redirect_to @user, notice: 'Profile Updated' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -73,4 +75,16 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
+
+    def signed_in_user
+      unless signed_in?
+        store_location
+        redirect_to signin_url, notice: "Please sign in."
+      end
+      
+    end
+
+    def correct_user
+      redirect_to(root_url) unless current_user?(@user)
+    end       
 end

@@ -9,6 +9,12 @@
   font-weight: 700;
   margin-bottom: 12px;
 }
+
+.settings-wrapper .avatar-box .personal-image {
+  text-align: center;
+}
+
+
 .settings-wrapper .avatar-box input[type="file"] {
   font-size: 11px;
 }

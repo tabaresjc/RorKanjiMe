@@ -1,26 +1,28 @@
 - content_for :title do
-  Signup
+  Sign up
 - content_for(:custom_css) do
   / this page specific styles
   %link(rel="stylesheet" href="/assets/css/compiled/signup.css")
 
-%div.box
-  %div.row
+- if @user.errors.any?
+  %div.row-fluid.message-container
     %div.col-md-12
       = render 'layouts/users_messages'
-  %div.content-wrap
-    %h6 Sign Up
-    = form_for(@user) do |f|
-      = f.text_field :name, :class => "form-control", :placeholder => "Name & Lastname"
-      = f.text_field :email, :class => "form-control", :placeholder => "Email"
-      = f.password_field :password, :class => "form-control", :placeholder => "Password"
-      = f.password_field :password_confirmation, :class => "form-control", :placeholder => "Confirm Password"
-      %div.action
-        = f.submit "Create my account", class: "btn-glow primary signup"
+%div.login-wrapper
+  %div.box
+    %div.content-wrap
+      %h6 Sign Up
+      = form_for(@user) do |f|
+        = f.text_field :name, :class => "form-control", :placeholder => "Name & Lastname", "autocomplete" => "off"
+        = f.text_field :email, :class => "form-control", :placeholder => "Email", "autocomplete" => "off"
+        = f.password_field :password, :class => "form-control", :placeholder => "Password", "autocomplete" => "off"
+        = f.password_field :password_confirmation, :class => "form-control", :placeholder => "Confirm Password", "autocomplete" => "off"
+        %div.action
+          = f.submit "Create my account", class: "btn-glow primary signup"
 
-%div.already
-  %p Already have an account?
-  %a{:href => signin_path } Sign in
+  %div.already
+    %p Already have an account?
+    %a{:href => signin_path } Sign in
 
 
 

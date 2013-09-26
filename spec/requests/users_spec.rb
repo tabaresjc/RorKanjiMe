@@ -1,5 +1,6 @@
 require 'spec_helper'
 
+
 describe "Users" do
 
   describe "index page" do
@@ -50,6 +51,44 @@ describe "Users" do
       end      
     end
   end
+
+  describe "edit" do
+    let(:user) { FactoryGirl.create(:user) }
+    before do
+      sign_in user
+      visit edit_user_path(user)
+    end
+    
+    subject { page }
+
+    describe "page" do
+      it { should have_content("Profile: #{user.name}") }
+      it { should have_link('Change', href: 'http://gravatar.com/emails') }
+    end
+
+    describe "with invalid information" do
+      before { click_button "Update User" }
+      it { should have_content('error') }
+    end
+
+    describe "with valid information" do
+      let(:new_name)  { "New Name" }
+      let(:new_email) { "new@example.com" }
+      before do
+        fill_in "Name",             with: new_name
+        fill_in "Email",            with: new_email
+        fill_in "Password",         with: user.password
+        fill_in "Confirm Password", with: user.password
+        click_button "Update User"
+      end
+
+      it { should have_title("Profile") }
+      it { should have_selector('div.alert.alert-success') }
+      it { should have_link('Sign out', href: signout_path) }
+      specify { expect(user.reload.name).to  eq new_name }
+      specify { expect(user.reload.email).to eq new_email }
+    end
+  end  
 
 
 end
