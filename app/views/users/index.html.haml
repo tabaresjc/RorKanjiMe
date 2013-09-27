@@ -16,14 +16,14 @@
       %table.table.table-hover
         %thead
           %tr
-            %th.col-md-4.sortable Name
+            %th.col-md-3.sortable Name
             %th.col-md-3.sortable
               %span.line
               Created
             %th.col-md-3.sortable
               %span.line
               Updated
-            %th.col-md-2.align-right
+            %th.col-md-3.align-right
               %span.line
         %tbody
           - @users.each do |user|
@@ -35,15 +35,15 @@
               %td= user.created_at
               %td= user.updated_at
               %td
-                %div.btn-group
+                %div
                   - if current_user?(user) || current_user.admin?
-                    %a{:href=> edit_user_path(user), :class=> "btn btn-primary" }
+                    = link_to edit_user_path(user), :class => "btn btn-primary" do
                       %i.icon-edit
-                      edit
+                      change
                   - if current_user.admin? && !current_user?(user)
-                    %a{:href=> url_for(:controller => 'users', :action => 'destroy', :id => user), :class=> "btn btn-danger", "data-confirm"=>"This will delete #{user.name}, Are you sure?", "data-method"=>"delete" }
+                    = link_to user_path(user), data: { confirm: "This will remove #{user.name}, Are you sure?", method: :delete}, :class => "btn btn-danger" do
                       %i.icon-trash
-                      delete
+                      remove
 %div
   %p
     %small= page_entries_info

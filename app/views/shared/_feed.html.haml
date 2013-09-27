@@ -1,0 +1,5 @@
+- if @feed_items.any?
+  .well
+    = render partial: 'shared/feed_item', collection: @feed_items
+  %ul.pagination.inverse.pull-right
+    = will_paginate @feed_items , :container => false, :previous_label => '&#8249;', :next_label => '&#8250;'

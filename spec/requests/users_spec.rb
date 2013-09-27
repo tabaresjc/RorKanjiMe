@@ -5,33 +5,34 @@ describe "Users" do
 
   describe "index" do
     let(:user) { FactoryGirl.create(:user) }
+    
     before(:each) do
       sign_in user
       visit users_path
     end
-
+    
     subject { page }
 
     it { should have_title('User List') }
     it { should have_content('Users') }
 
     describe "pagination" do
-
-      before do
+      before(:all)do
+        User.delete_all
         30.times { FactoryGirl.create(:user) }
       end
-
+      after(:all) { User.delete_all } 
+         
       it { should have_selector('ul.pagination') }
-
       it "should list each user" do
-        User.paginate(page: 1, :per_page => 10).each do |user|
-          expect(page).to have_selector('tr > td', text: user.name)
+        User.paginate(page: 1, :per_page => 10).each do |ul|
+          expect(page).to have_content(ul.name)
         end
       end
     end
 
     describe "delete links" do
-      it { should_not have_link('delete') }
+      it { should_not have_link('remove') }
       describe "as an admin user" do
         let(:admin) { FactoryGirl.create(:admin) }
         
@@ -40,24 +41,40 @@ describe "Users" do
           visit users_path
         end
 
-        it { should have_link('delete') }
+        it { should have_link('remove') }
 
         it "should be able to delete another user" do
           expect do
-            click_link('delete', match: :first)
+            click_link('remove', match: :first)
           end.to change(User, :count).by(-1)
         end
         
       end
     end
-  end   
+  end
 
   describe "profile page" do
     let(:user) { FactoryGirl.create(:user) }
-    before { visit user_path(user) }
+    let!(:m1) { FactoryGirl.create(:micropost, user: user, content: "Foo", title: "Foo Title") }
+    let!(:m2) { FactoryGirl.create(:micropost, user: user, content: "Bar", title: "Bar Title") }
 
-    it { expect(page).to have_content(user.name) }
-    it { expect(page).to have_content(user.email) }
+    before do
+      sign_in user
+      visit user_path(user)
+    end
+
+    subject { page }
+
+    it { should have_content(user.name) }
+    
+
+    describe "microposts" do
+      it { should have_content(m1.content) }
+      it { should have_content(m1.title) }
+      it { should have_content(m2.content) }
+      it { should have_content(m2.title) }
+      it { should have_content(user.microposts.count) }
+    end
   end
 
   describe "signup" do

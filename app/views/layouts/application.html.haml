@@ -4,7 +4,7 @@
     %title= full_title(yield(:title))
     %meta{"http-equiv"=>"Content-Type", :content => "text/html; charset=utf-8"}
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
-    %meta{:content => content_for?(:description) ? yield(:description) : "Rails Bootstrap", :name => "description"}
+    %meta{:content => content_for?(:description) ? yield(:description) : "Rails", :name => "description"}
 
     / StyleSheets   
     = stylesheet_link_tag "application"
@@ -14,8 +14,12 @@
            
   %body
     = render 'layouts/banner'
-    = render 'layouts/sidebar'           
+    = render 'layouts/sidebar'
+
     .content
+      - if content_for?(:main_header)
+        #main-stats
+          = yield(:main_header)    
       #pad-wrapper
         = render 'layouts/messages' unless flash.empty?
         = yield

@@ -7,12 +7,13 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.paginate(page: params[:page], :per_page => 10).order('created_at ASC')
+    @users = User.paginate(page: params[:page], :per_page => 10)
   end
 
   # GET /users/1
   # GET /users/1.json
   def show
+    @microposts = @user.microposts.paginate(page: params[:page], :per_page => 10)
   end
 
   # GET /users/new
@@ -59,9 +60,10 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
+    name = @user.name
     @user.destroy
     respond_to do |format|
-      format.html { redirect_to users_url }
+      format.html { redirect_to users_url, notice: "The profile with name: #{name} was removed" }
       format.json { head :no_content }
     end
   end
@@ -75,14 +77,6 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
-    end
-
-    def signed_in_user
-      unless signed_in?
-        store_location
-        redirect_to signin_url, notice: "Please sign in."
-      end
-      
     end
 
     def correct_user

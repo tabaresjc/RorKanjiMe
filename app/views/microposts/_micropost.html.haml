@@ -1,0 +1,7 @@
+.div.panel.panel-primary
+	.div.panel-heading
+		%p= "#{micropost.title}"
+	.div.panel-body= micropost.content
+	.panel-footer
+		%p
+			%small.pull-right= "Posted #{time_ago_in_words(micropost.created_at)}"

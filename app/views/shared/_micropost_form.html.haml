@@ -1,0 +1,10 @@
+.well
+  = form_for(@micropost) do |f|
+    = render 'shared/error_messages', object: f.object
+    .form-group
+      = f.text_field :title, :class=> "form-control input-sm", placeholder: "Insert title"
+    .form-group
+      = f.text_area :content, :class=> "form-control input-sm", placeholder: "Compose new micropost..."
+    .actions
+      = f.submit "Post", class: "btn btn-large btn-primary pull-right"
+      .clearfix

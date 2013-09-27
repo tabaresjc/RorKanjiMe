@@ -5,14 +5,35 @@
   %link(rel="stylesheet" href="/assets/css/compiled/user-profile.css")
 
 
-%div.user-profile
-  %div{:class=>"row header"}
-    %div.col-md-12
+.user-profile
+  %div.row.header
+    %div.col-md-8
       = gravatar_for @user, :size => 96
       %h3.name= @user.name
       %span.area= @user.email
-    - if current_user.admin? && !current_user?(@user)
-      = link_to (content_tag(:i, "", :class => "icon-trash") + " Delete").html_safe, user_path(@user), :method => :delete, :class => 'btn-flat icon pull-right delete-user', "title"=>"Delete user",  "data-toggle"=>"tooltip", "data-placement"=>"top"
-    = link_to (content_tag(:i, "", :class => "icon-edit") + " Edit").html_safe, edit_user_path(@user), :class => "btn-flat icon large pull-right edit"
+    .pull-right
+      - if current_user.admin? || current_user?(@user)
+        = link_to edit_user_path(@user), :class => "btn btn-primary" do
+          %i.icon-edit
+          Change
+      - if current_user.admin? && !current_user?(@user)
+        = link_to user_path(@user), data: { confirm: "This will remove #{@user.name}, Are you sure?", method: :delete}, :class => "btn btn-danger" do
+          %i.icon-trash
+          Remove
+  %div.row.profile
+    .col-md-9      
+      - if @user.microposts.any?
+        %h3 Recent Posts 
+        %div
+          = render @microposts
+        %div
+          %p
+            %small= page_entries_info @microposts
+          %ul.pagination.inverse.pull-right
+            = will_paginate @microposts, :container => false, :previous_label => '&#8249;', :next_label => '&#8250;'
+    .col-md-3.col-xs-12.pull-right
+
+
+
 
 

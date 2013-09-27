@@ -4,8 +4,13 @@
   / this page specific styles
   %link(rel="stylesheet" href="/assets/css/compiled/index.css")
 
+.div.row
+  .col-md-3
+    = render 'shared/user_info'    
+  .col-md-9
+    = render 'shared/micropost_form'
+    = render 'shared/feed'
+    
 
-%div.row
-  %div.col-md-12
-    %h3.title Home
+
 
