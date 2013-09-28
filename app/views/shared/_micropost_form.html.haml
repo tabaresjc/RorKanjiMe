@@ -6,5 +6,5 @@
     .form-group
       = f.text_area :content, :class=> "form-control input-sm", placeholder: "Compose new micropost..."
     .actions
-      = f.submit "Post", class: "btn btn-large btn-primary pull-right"
+      = f.submit "Post", class: "btn btn-large btn-primary pull-right", "data-disable-with" =>"Saving..."
       .clearfix

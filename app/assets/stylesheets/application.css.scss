@@ -10,7 +10,7 @@
  *
  *= require_self
  
- *= require css/bootstrap/bootstrap.css
+ 
  *= require css/bootstrap/bootstrap-overrides.css
  
  *= require css/lib/jquery-ui-1.10.2.custom.css
@@ -18,8 +18,7 @@
  
  *= require css/compiled/layout.css
  *= require css/compiled/elements.css
- *= require css/compiled/icons.css 
- 
- *= require_tree .
+ *= require css/compiled/icons.css
+
  */
 

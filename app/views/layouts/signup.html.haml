@@ -5,7 +5,10 @@
     %title= full_title(yield(:title))
     %meta{:content => content_for?(:description) ? yield(:description) : "Rails Bootstrap", :name => "description"}
    
-    = stylesheet_link_tag "application"  
+    // Load default bootstrap from cdn
+    %link{:href=>"//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css", :rel=>"stylesheet"}
+    / StyleSheets   
+    = stylesheet_link_tag "application"
     = yield(:custom_css)
     = render 'layouts/fonts'  
   %body
@@ -20,7 +23,8 @@
 
     = yield
     = render 'layouts/debug' if Rails.env.development?
-      
     = javascript_include_tag "application"
+    %script{:src=>"//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"}
+    %script{:src=>"/assets/js/theme.js"}
     = csrf_meta_tags  
     = yield(:custom_js)

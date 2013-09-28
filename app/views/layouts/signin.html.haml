@@ -4,8 +4,11 @@
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
     %title= full_title(yield(:title))
     %meta{:content => content_for?(:description) ? yield(:description) : "Rails Bootstrap", :name => "description"}
-   
-    = stylesheet_link_tag "application"  
+
+    // Load default bootstrap from cdn
+    %link{:href=>"//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css", :rel=>"stylesheet"}
+    / StyleSheets   
+    = stylesheet_link_tag "application"
     = yield(:custom_css)
     = render 'layouts/fonts' 
   %body.login-bg
@@ -15,15 +18,16 @@
           %a{ :href => root_path }
             %img.logo{ :src => "/assets/img/logo-white.png" }
     - if !flash.empty?
-      .row-fluid
-        .col-md-12
+      .row
+        .col-md-4.col-md-offset-4
           .message-container
             = render 'layouts/messages'
     
     %div.login-wrapper      
       = yield
       = render 'layouts/debug' if Rails.env.development?
-
     = javascript_include_tag "application"
+    %script{:src=>"//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"}
+    %script{:src=>"/assets/js/theme.js"}
     = csrf_meta_tags   
     = yield(:custom_js)

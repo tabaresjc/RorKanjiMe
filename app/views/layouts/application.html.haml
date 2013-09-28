@@ -6,6 +6,8 @@
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
     %meta{:content => content_for?(:description) ? yield(:description) : "Rails", :name => "description"}
 
+    // Load default bootstrap from cdn
+    %link{:href=>"//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css", :rel=>"stylesheet"}
     / StyleSheets   
     = stylesheet_link_tag "application"
     = stylesheet_link_tag "/assets/css/compiled/skins/dark.css"
@@ -15,7 +17,6 @@
   %body
     = render 'layouts/banner'
     = render 'layouts/sidebar'
-
     .content
       - if content_for?(:main_header)
         #main-stats
@@ -25,5 +26,7 @@
         = yield
     = render 'layouts/debug' if Rails.env.development?
     = javascript_include_tag "application"
+    %script{:src=>"//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"}
+    %script{:src=>"/assets/js/theme.js"}
     = csrf_meta_tags
     = yield(:custom_js)

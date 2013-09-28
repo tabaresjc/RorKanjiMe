@@ -1,4 +1,9 @@
-.well{ :style => "text-align:center;"}
-  = link_to gravatar_for(current_user, size: 144, imgclass: "img-thumbnail"), current_user
-  %h3= current_user.name
-  %span= pluralize(current_user.microposts.count, "micropost")
+.div.panel.panel-primary
+  .div.panel-heading= current_user.name
+  .div.panel-body{ :style => "text-align:center;"}
+    = link_to gravatar_for(current_user, size: 144, imgclass: "img-thumbnail"), current_user
+    %div= pluralize(current_user.microposts.count, "micropost")
+  .panel-footer
+    .div      
+      = link_to current_user, :class => "btn btn-success", :title => "View user's profile" do
+        %i.glyphicon.glyphicon-user
