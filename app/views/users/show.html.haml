@@ -10,9 +10,12 @@
       .div.panel-heading= @user.name
       .div.panel-body{ :style => "text-align:center;"}
         = gravatar_for @user, size: 144, imgclass: "img-thumbnail"
-        %div= pluralize(@user.microposts.count, "micropost")
+        %div
+          = @user.email        
+        %div
+          = pluralize(@user.microposts.count, "micropost")
       .panel-footer
-        .div
+        .div.btn-group
           - if current_user.admin? || current_user?(@user)
             = link_to edit_user_path(@user), :class => "btn btn-primary", :title => "Change user's settings" do
               %i.glyphicon.glyphicon-edit

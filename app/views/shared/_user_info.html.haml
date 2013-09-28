@@ -4,6 +4,6 @@
     = link_to gravatar_for(current_user, size: 144, imgclass: "img-thumbnail"), current_user
     %div= pluralize(current_user.microposts.count, "micropost")
   .panel-footer
-    .div      
+    .div.btn-group
       = link_to current_user, :class => "btn btn-success", :title => "View user's profile" do
         %i.glyphicon.glyphicon-user

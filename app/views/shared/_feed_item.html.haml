@@ -9,5 +9,6 @@
   .panel-footer
     %div
       - if current_user?(feed_item.user)
-        = link_to "delete", feed_item, data: { confirm: "This will remove the post #{feed_item.title} \n Are you sure?", method: :delete },title: feed_item.content
+        = link_to feed_item, data: { confirm: "This will remove the post #{feed_item.title} \n Are you sure?", method: :delete }, title: "Remove this post"  do
+          %i.glyphicon.glyphicon-trash
       %small.pull-right= "Posted #{time_ago_in_words(feed_item.created_at)}"

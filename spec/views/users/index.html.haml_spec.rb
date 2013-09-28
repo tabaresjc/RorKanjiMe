@@ -1,23 +1,30 @@
 require 'spec_helper'
 
 describe "users/index" do
+  let(:user) { FactoryGirl.create(:user) }
+  
   before(:each) do
-    assign(:users, [
-      stub_model(User,
-        :name => "Name",
-        :email => "Email"
-      ),
-      stub_model(User,
-        :name => "Name",
-        :email => "Email"
-      )
-    ])
+    sign_in user
+    visit users_path
   end
+  
+  subject { page }
 
-  it "renders a list of users" do
-    render
-    # Run the generator again with the --webrat flag if you want to use webrat matchers
-    assert_select "tr>td", :text => "Name".to_s, :count => 2
-    assert_select "tr>td", :text => "Email".to_s, :count => 2
+  it { should have_title('User List') }
+  it { should have_content('Users') }
+
+  describe "pagination" do
+    before(:all)do
+      User.delete_all
+      30.times { FactoryGirl.create(:user) }
+    end
+    after(:all) { User.delete_all } 
+       
+    it { should have_selector('ul.pagination') }
+    it "should list each user" do
+      User.paginate(page: 1, :per_page => 10).each do |ul|
+        expect(page).to have_content(ul.name)
+      end
+    end
   end
 end

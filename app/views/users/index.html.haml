@@ -35,15 +35,13 @@
               %td= user.created_at
               %td= user.updated_at
               %td
-                %div
+                %div.btn-group
                   - if current_user?(user) || current_user.admin?
-                    = link_to edit_user_path(user), :class => "btn btn-primary" do
+                    = link_to edit_user_path(user), :class => "btn btn-primary", :title => "Change user's settings", :id => "cu#{user.id}" do
                       %i.glyphicon.glyphicon-edit
-                      change
                   - if current_user.admin? && !current_user?(user)
-                    = link_to user_path(user), data: { confirm: "This will remove #{user.name}, Are you sure?", method: :delete}, :class => "btn btn-danger" do
+                    = link_to user_path(user), data: { confirm: "This will remove #{user.name}, Are you sure?", method: :delete}, :class => "btn btn-danger", :title => "Remove this user", :id => "ru#{user.id}" do
                       %i.glyphicon.glyphicon-trash
-                      remove
 %div
   %p
     %small= page_entries_info

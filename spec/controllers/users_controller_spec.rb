@@ -25,11 +25,14 @@ describe UsersController do
   # adjust the attributes here as well.
   
   let(:user) { FactoryGirl.create(:user) }
-  let(:valid_attributes) { {:name => "First User", :email => "user@example.com", :password => "foobar", :password_confirmation => "foobar"} }
+  let(:valid_attributes) { {:name => "First User", :email => "user@example.com", :password => "admin123456", :password_confirmation => "admin123456"} }
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # UsersController. Be sure to keep this updated too.
-  
+  before(:each) do
+    sign_in user, no_capybara: true
+  end
+
   describe "GET index" do
     it "assigns all users as @users" do
       get :index, {}
@@ -53,7 +56,7 @@ describe UsersController do
 
   describe "GET edit" do
     it "assigns the requested user as @user" do
-      get :edit, {:id => user.to_param}
+      get :edit, {:id => user}
       assigns(:user).should eq(user)
     end
   end
@@ -135,15 +138,30 @@ describe UsersController do
   end
 
   describe "DELETE destroy" do
-    it "destroys the requested user" do
-      delete :destroy, {:id => user.to_param}
-      User.count .should == 0
-    end
+    let(:administrator) { FactoryGirl.create(:admin) }
 
-    it "redirects to the users list" do
-      delete :destroy, {:id => user.to_param}
-      response.should redirect_to(users_url)
+
+    describe "as a non admin" do
+      it "reject destroy action from non admins" do
+        delete :destroy, {:id => user.to_param}
+        response.should redirect_to(root_url)
+      end
+    end
+   
+    describe "as an admin" do
+      before do
+        sign_in administrator, no_capybara: true
+      end 
+      it "destroys the requested user" do
+        expect do
+          delete :destroy, {:id => user.to_param}
+        end.to change(User, :count).by(-1)        
+      end
+
+      it "redirects to the users list" do
+        delete :destroy, {:id => user.to_param}
+        response.should redirect_to(users_url)
+      end  
     end
   end
-
 end

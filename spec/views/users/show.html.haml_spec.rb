@@ -1,17 +1,14 @@
 require 'spec_helper'
 
 describe "users/show" do
-  before(:each) do
-    @user = assign(:user, stub_model(User,
-      :name => "Name",
-      :email => "Email"
-    ))
+  let(:user) { FactoryGirl.create(:user) }
+
+  before do
+    sign_in user
+    visit user_path(user)
   end
 
-  it "renders attributes in <p>" do
-    render
-    # Run the generator again with the --webrat flag if you want to use webrat matchers
-    rendered.should match(/Name/)
-    rendered.should match(/Email/)
-  end
+  subject { page }
+  it { should have_content(user.name) }
+  it { should have_content(user.email) }
 end
