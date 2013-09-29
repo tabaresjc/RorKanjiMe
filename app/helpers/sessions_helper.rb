@@ -46,5 +46,9 @@ module SessionsHelper
 
 	def store_location
 		session[:return_to] = request.url if request.get?
-	end  	
+	end
+
+  def format_dt(rawdt)
+      rawdt.strftime("%m/%d/%Y %I:%M %p")
+  end
 end

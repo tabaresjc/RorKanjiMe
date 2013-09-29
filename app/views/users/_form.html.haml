@@ -19,7 +19,7 @@
     = f.label :password_confirmation, "Time Zone", :class => "col-lg-2 control-label"
     %div.col-lg-8
       %div.ui-select
-        = time_zone_select :time_zone, :class => "user_time_zone"
+        = time_zone_select "user", "timezone", nil, :class => "user_time_zone"
   %div.actions
     = f.submit  class: "btn btn-large btn-success"
     %a{:href => users_path , :class => "btn btn-large btn-danger pull-left"} Back

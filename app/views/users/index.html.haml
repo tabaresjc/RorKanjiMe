@@ -32,8 +32,8 @@
                 = gravatar_for user
                 = link_to user.name, user, :class=>"name"
                 %span{:class=>"subtext"}= user.email
-              %td= user.created_at
-              %td= user.updated_at
+              %td= format_dt user.created_at
+              %td= format_dt user.updated_at
               %td
                 %div.btn-group
                   - if current_user?(user) || current_user.admin?

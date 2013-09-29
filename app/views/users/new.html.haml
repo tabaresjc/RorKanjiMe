@@ -17,6 +17,7 @@
         = f.text_field :email, :class => "form-control", :placeholder => "Email", "autocomplete" => "off"
         = f.password_field :password, :class => "form-control", :placeholder => "Password", "autocomplete" => "off"
         = f.password_field :password_confirmation, :class => "form-control", :placeholder => "Confirm Password", "autocomplete" => "off"
+        = f.hidden_field :timezone
         %div.action
           = f.submit "Create my account", class: "btn-glow primary signup"
 
