@@ -3,6 +3,8 @@
 - content_for(:custom_css) do
   / this page specific styles
   %link(rel="stylesheet" href="/assets/css/compiled/index.css")
+- content_for :main_header do
+  = render 'shared/stats'    
 
 .div.row
   .col-md-3

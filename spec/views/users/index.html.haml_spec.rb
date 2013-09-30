@@ -27,4 +27,37 @@ describe "users/index" do
       end
     end
   end
+
+
+  describe "for signed-in users" do      
+    before do
+      FactoryGirl.create(:micropost, user: user, content: "Lorem", title: "Lorem 1")
+      FactoryGirl.create(:micropost, user: user, content: "Ipsum", title: "Ipsum 2")
+    end
+
+
+    describe "render the user's feed" do
+      before do
+        visit root_path
+      end
+
+      it "should show all micropost of the user" do
+        user.feed.each do |item|
+          expect(page).to have_selector("div#fi#{item.id}", text: item.content)
+        end
+      end
+
+    end
+
+    describe "follower/following counts" do
+      let(:other_user) { FactoryGirl.create(:user) }
+      before do
+        other_user.follow!(user)
+        visit root_path
+      end
+
+      it { should have_link("0 following", href: following_user_path(user)) }
+      it { should have_link("1 followers", href: followers_user_path(user)) }
+    end
+  end
 end

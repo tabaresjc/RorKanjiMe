@@ -1,0 +1,17 @@
+- @user ||= current_user
+.row.stats-row
+    .col-md-3.col-sm-3.stat
+        .data
+            %span.number= @user.followed_users.count
+            following
+        %span.date
+    .col-md-3.col-sm-3.stat
+        .data
+            %span.number= @user.followers.count
+            followers
+        %span.date
+    .col-md-3.col-sm-3.stat
+        .data
+            %span.number= @user.microposts.count
+            microposts
+        %span.date

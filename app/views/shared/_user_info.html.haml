@@ -1,9 +1,12 @@
+- @user ||= current_user
 .div.panel.panel-primary
-  .div.panel-heading= current_user.name
+  .div.panel-heading= @user.name
   .div.panel-body{ :style => "text-align:center;"}
-    = link_to gravatar_for(current_user, size: 144, imgclass: "img-thumbnail"), current_user
-    %div= pluralize(current_user.microposts.count, "micropost")
+    = link_to gravatar_for(@user, size: 144, imgclass: "img-thumbnail"), @user
+    %div= @user.email    
+    %div= pluralize(@user.microposts.count, "micropost")
+    %div= render "shared/mini_stats"
   .panel-footer
     .div.btn-group
-      = link_to current_user, :class => "btn btn-success", :title => "View user's profile" do
+      = link_to @user, :class => "btn btn-success", :title => "View user's profile" do
         %i.glyphicon.glyphicon-user

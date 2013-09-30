@@ -10,10 +10,9 @@
       .div.panel-heading= @user.name
       .div.panel-body{ :style => "text-align:center;"}
         = gravatar_for @user, size: 144, imgclass: "img-thumbnail"
-        %div
-          = @user.email        
-        %div
-          = pluralize(@user.microposts.count, "micropost")
+        %div= @user.email        
+        %div= pluralize(@user.microposts.count, "micropost")
+        %div= render "shared/mini_stats"
       .panel-footer
         .div.btn-group
           - if current_user.admin? || current_user?(@user)
@@ -22,6 +21,8 @@
           - if current_user.admin? && !current_user?(@user)
             = link_to user_path(@user), data: { confirm: "This will remove #{@user.name}, Are you sure?", method: :delete}, :class => "btn btn-danger", :title => "Remove this user" do
               %i.glyphicon.glyphicon-trash
+        .div.btn-group.pull-right
+          = render 'follow_form' if signed_in?
   .col-md-9  
     - if @user.microposts.any?      
       %h3 Recent Posts      
