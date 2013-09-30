@@ -45,7 +45,7 @@ describe "Micropost pages" do
 
     it "should render the user's feed" do
       user.feed.each do |item|
-        expect(page).to have_selector("div##{item.id}", text: item.content)
+        expect(page).to have_selector("div#fi#{item.id}", text: item.content)
       end
     end
   end 

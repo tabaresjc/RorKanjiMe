@@ -1,9 +1,16 @@
 module SessionsHelper
-	def sign_in(user)
+	def sign_in(user, options = { remember_me: false })
+    remember_me = options[:remember_me]    
 		remember_token = User.new_remember_token
-		cookies.permanent[:remember_token] = remember_token
-		user.update_attribute(:remember_token, User.encrypt(remember_token))
-		self.current_user = user
+		
+    if remember_me 
+      cookies.permanent[:remember_token] = remember_token
+    else
+      cookies[:remember_token] = remember_token
+    end
+		
+    user.update_attribute(:remember_token, User.encrypt(remember_token))
+    self.current_user = user
 	end
 
 	def current_user=(user)
@@ -22,7 +29,7 @@ module SessionsHelper
   def signed_in_user
     unless signed_in?
       store_location
-      redirect_to signin_url, notice: "Visitors Please Sign In."
+      redirect_to signin_url
     end
   end
 

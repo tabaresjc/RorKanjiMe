@@ -12,8 +12,8 @@
       = f.text_field :email, :class => "form-control", :placeholder => "Email address"
       = f.password_field :password, :class => "form-control", :placeholder => "Your password"
       %div.remember
-        <input id="remember-me" type="checkbox">
-        <label for="remember-me">Remember me</label>
+        = f.check_box :remember_me
+        = f.label :remember_me, "Remember me"
       = f.submit "Sign in", class: "btn-glow primary login"
 %div.no-account
   %p Don't have an account?

@@ -32,6 +32,8 @@ describe "Authentication" do
       before do
         fill_in "session[email]",    with: user.email.upcase
         fill_in "session[password]", with: user.password
+        check 'session[remember_me]'
+
         click_button "Sign in"
       end
 
@@ -45,7 +47,7 @@ describe "Authentication" do
       describe "followed by signout" do
         before { click_link "Sign out" }
         it { should have_button('Sign in') }
-      end      
+      end
     end
   end
 

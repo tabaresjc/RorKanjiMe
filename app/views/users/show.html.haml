@@ -15,10 +15,10 @@
         %div= render "shared/mini_stats"
       .panel-footer
         .div.btn-group
-          - if current_user.admin? || current_user?(@user)
+          - if (current_user!=nil && current_user.admin?) || current_user?(@user)
             = link_to edit_user_path(@user), :class => "btn btn-primary", :title => "Change user's settings" do
               %i.glyphicon.glyphicon-edit
-          - if current_user.admin? && !current_user?(@user)
+          - if (current_user!=nil && current_user.admin?) && !current_user?(@user)
             = link_to user_path(@user), data: { confirm: "This will remove #{@user.name}, Are you sure?", method: :delete}, :class => "btn btn-danger", :title => "Remove this user" do
               %i.glyphicon.glyphicon-trash
         .div.btn-group.pull-right
