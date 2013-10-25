@@ -1,0 +1,56 @@
+- content_for :title do
+  = @title
+- content_for(:custom_css) do
+  / this page specific styles
+  %link(rel="stylesheet" href="/assets/css/compiled/index.css")
+
+.div.row
+  .col-md-3
+    .div.panel.panel-primary
+      .div.panel-heading= @user.name
+      .div.panel-body{ :style => "text-align:center;"}
+        = gravatar_for @user, size: 144, imgclass: "img-thumbnail"
+        %div= @user.email        
+        %div= pluralize(@user.microposts.count, "micropost")
+        %div= render "shared/mini_stats"
+      .panel-footer
+        .div.btn-group
+          = link_to @user, :class => "btn btn-primary", :title => "view my profile" do
+            %i.glyphicon.glyphicon-eye-open
+        .div.btn-group.pull-right
+    - if @users.any?
+      %div.well
+        - @users.each do |user|
+          = link_to gravatar_for(user, size: 30, imgclass: "img-thumbnail"), user
+  .col-md-9
+    %h3= @title
+    - if @users.any?
+      %div.list-group
+        - @users.each do |user|
+          %li.list-group-item
+            %div.row
+              %div.col-md-2
+                = link_to gravatar_for(user, size: 60, imgclass: "img-thumbnail"), user
+              %div.col-md-8
+                %h3= user.name
+                %div= user.email
+              %div.col-md-2
+                - if current_user.admin? && !current_user?(user)
+                  = link_to user_path(user), data: { confirm: "This will remove #{user.name}, Are you sure?", method: :delete}, :class => "btn btn-danger", :title => "Remove this user", :id => "ru#{user.id}" do
+                    %i.glyphicon.glyphicon-trash
+      %div
+        %p
+          %small= page_entries_info @microposts
+        %ul.pagination.inverse.pull-right
+          = will_paginate @users, :container => false, :previous_label => '&#8249;', :next_label => '&#8250;'            
+
+
+
+
+
+
+
+
+
+
+
