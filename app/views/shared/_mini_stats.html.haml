@@ -1,8 +1,8 @@
 - @user ||= current_user
 = link_to following_user_path(@user), :title => "Users that #{@user.name} is following" do
-  %strong= @user.followed_users.count
+  %strong#following= @user.followed_users.count
   following
 |
 = link_to followers_user_path(@user), :title => "Users following to #{@user.name}" do
-  %strong= @user.followers.count
+  %strong#followers= @user.followers.count
   followers
