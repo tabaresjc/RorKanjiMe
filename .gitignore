@@ -78,3 +78,4 @@ pickle-email-*.html
 /config/application.yml
 
 .secret
+gitcommit.log
